@@ -5,17 +5,20 @@ parent: Script APIs
 nav_order: 5
 ---
 
-## Get stored script contexts
+# Get stored script contexts
+**Introduced 1.0**
+{: .label .label-purple }
 
 Retrieves all contexts for stored scripts.
 
-#### Sample request
+## Example request
 
 ````json
 GET _script_context
 ````
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 The `GET _script_context` request returns the following fields:
 
@@ -544,24 +547,24 @@ The `GET _script_context` request returns the following fields:
 }
 ````
 
-### Response fields
+## Response fields
 
 The `GET _script_context` request returns the following response fields:
 
-| Field | Data Type | Description | 
+| Field | Data type | Description | 
 :--- | :--- | :---
 | contexts | List | A list of all contexts. See [Script object](#script-context).  |
 
 #### Script context
 
-| Field | Data Type | Description | 
+| Field | Data type | Description | 
 :--- | :--- | :---
 | name | String | The context name. |
 |  methods | List | List of the context's allowable methods. See [Script object](#context-methods). |
 
 #### Context methods
 
-| Field | Data Type | Description | 
+| Field | Data type | Description | 
 :--- | :--- | :---
 | name | String | Method name. |
 | name | String | Type that the method returns (`boolean`, `object`, `number`, and so on). |
@@ -569,7 +572,7 @@ The `GET _script_context` request returns the following response fields:
 
 #### Method parameters 
 
-| Field | Data Type | Description | 
+| Field | Data type | Description | 
 :--- | :--- | :---
 | type | String | Parameter data type. | 
 | name | String | Parameter name. |

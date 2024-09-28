@@ -1,14 +1,17 @@
 ---
 layout: default
 title: Commands
-parent: PPL - Piped Processing Language
+parent: PPL
 grand_parent: SQL and PPL
 nav_order: 2
+redirect_from:
+  - /observability-plugin/ppl/commands/
+  - /search-plugins/ppl/commands/
 ---
 
 # Commands
 
-`PPL` supports all [`SQL` common]({{site.url}}{{site.baseurl}}/search-plugins/sql/functions/) functions, including [relevance search]({{site.url}}{{site.baseurl}}/search-plugins/sql/full-text/), but also introduces few more functions (called `commands`) which are available in `PPL` only.
+`PPL` supports most [`SQL` common]({{site.url}}{{site.baseurl}}/search-plugins/sql/functions/) functions, including [relevance search]({{site.url}}{{site.baseurl}}/search-plugins/sql/full-text/), but also introduces few more functions (called `commands`) which are available in `PPL` only.
 
 ## dedup
 
@@ -760,7 +763,7 @@ The example shows how to classify three Iris species (Iris setosa, Iris virginic
 PPL query:
 
 ```sql
-os> source=iris_data | fields sepal_length_in_cm, sepal_width_in_cm, petal_length_in_cm, petal_width_in_cm | kmeans 3
+os> source=iris_data | fields sepal_length_in_cm, sepal_width_in_cm, petal_length_in_cm, petal_width_in_cm | kmeans centroids=3
 ```
 
 sepal_length_in_cm | sepal_width_in_cm | petal_length_in_cm | petal_width_in_cm | ClusterID

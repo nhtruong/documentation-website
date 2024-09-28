@@ -6,6 +6,8 @@ nav_order: 7
 ---
 
 ## Delete snapshot
+**Introduced 1.0**
+{: .label .label-purple }
 
 Deletes a snapshot from a repository.
 
@@ -15,20 +17,23 @@ Deletes a snapshot from a repository.
 
 * To view a list of your snapshots, see [cat snapshots]({{site.url}}{{site.baseurl}}/api-reference/cat/cat-snapshots).
 
-### Path parameters
+## Path parameters
 
-Parameter | Data Type | Description
+Parameter | Data type | Description
 :--- | :--- | :---
 repository | String | Repostory that contains the snapshot. |
 snapshot | String | Snapshot to delete. |
 
-#### Sample request
+## Example request
 
-The following request deletes a snapshot called `my-first-snapshot` from the `my-opensearch-repo` repository.
+The following request deletes a snapshot called `my-first-snapshot` from the `my-opensearch-repo` repository:
 
-`DELETE _snapshot/my-opensearch-repo/my-first-snapshot`
+```json
+DELETE _snapshot/my-opensearch-repo/my-first-snapshot
+```
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 Upon success, the response returns the following JSON object:
 

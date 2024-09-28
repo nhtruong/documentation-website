@@ -6,6 +6,8 @@ nav_order: 40
 ---
 
 # Nodes usage
+**Introduced 1.0**
+{: .label .label-purple }
 
 The nodes usage endpoint returns low-level information about REST action usage on nodes.
 
@@ -36,15 +38,16 @@ Parameter | Type | Description
 timeout | Time | Sets the time limit for a response from the node. Default is `30s`.
 cluster_manager_timeout | Time | Sets the time limit for a response from the cluster manager. Default is `30s`.
 
-#### Sample request
+## Example request
 
 The following request returns usage details for all nodes:
 
 ```
 GET _nodes/usage
 ```
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 The following is an example response:
 
@@ -91,4 +94,4 @@ The following is an example response:
 
 ## Required permissions
 
-If you use the security plugin, make sure you set the following permissions: `cluster:manage/nodes` or `cluster:monitor/nodes`.
+If you use the Security plugin, make sure you set the following permissions: `cluster:manage/nodes` or `cluster:monitor/nodes`.

@@ -5,19 +5,15 @@ parent: CAT API
 
 nav_order: 70
 has_children: false
+redirect_from:
+- /opensearch/rest-api/cat/cat-tasks/
 ---
 
 # CAT tasks
-Introduced 1.0
+**Introduced 1.0**
 {: .label .label-purple }
 
 The CAT tasks operation lists the progress of all tasks currently running on your cluster.
-
-## Example
-
-```
-GET _cat/tasks?v
-```
 
 ## Path and HTTP methods
 
@@ -29,7 +25,7 @@ GET _cat/tasks
 
 All CAT tasks URL parameters are optional.
 
-In addition to the [common URL parameters]({{site.url}}{{site.baseurl}}/api-reference/cat/index), you can specify the following parameter:
+In addition to the [common URL parameters]({{site.url}}{{site.baseurl}}/api-reference/cat/index), you can specify the following parameters:
 
 Parameter | Type | Description
 :--- | :--- | :---
@@ -38,8 +34,17 @@ detailed | Boolean | Returns detailed task information. (Default: false)
 parent_task_id | String | Returns tasks with a specified parent task ID (node_id:task_number). Keep empty or set to -1 to return all.
 time | Time | Specify the units for time. For example, `5d` or `7h`. For more information, see [Supported units]({{site.url}}{{site.baseurl}}/opensearch/units/).
 
+## Example request
 
-## Response
+The following example request lists all tasks in progress:
+
+```
+GET _cat/tasks?v
+```
+{% include copy-curl.html %}
+
+
+## Example response
 
 ```json
 action | task_id | parent_task_id | type | start_time | timestamp | running_time | ip | node

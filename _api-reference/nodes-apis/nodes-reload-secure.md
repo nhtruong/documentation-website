@@ -6,6 +6,8 @@ nav_order: 50
 ---
 
 # Nodes reload secure settings
+**Introduced 1.0**
+{: .label .label-purple }
 
 The nodes reload secure settings endpoint allows you to change secure settings on a node and reload the secure settings without restarting the node.
 
@@ -34,15 +36,16 @@ The request may include an optional object containing the password for the OpenS
 }
 ```
 
-#### Sample request
+## Example request
 
 The following is an example API request:
 
 ```
 POST _nodes/reload_secure_settings
 ```
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 The following is an example response:
 
@@ -64,4 +67,4 @@ The following is an example response:
 
 ## Required permissions
 
-If you use the security plugin, make sure you set the following permissions: `cluster:manage/nodes`.
+If you use the Security plugin, make sure you set the following permissions: `cluster:manage/nodes`.

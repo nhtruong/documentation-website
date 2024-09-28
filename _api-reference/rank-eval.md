@@ -5,6 +5,8 @@ nav_order: 60
 ---
 
 # Ranking evaluation
+**Introduced 1.0**
+{: .label .label-purple }
 
 The [rank]({{site.url}}{{site.baseurl}}/opensearch/supported-field-types/rank/) eval endpoint allows you to evaluate the quality of ranked search results.
 
@@ -19,7 +21,7 @@ POST <index_name>/_rank_eval
 
 Query parameters are optional.
 
-Parameter | Data Type | Description
+Parameter | Data type | Description
 :--- | :---  | :---
 ignore_unavailable | Boolean | Defaults to `false`. When set to `false` the response body will return an error if an index is closed or missing.
 allow_no_indices | Boolean | Defaults to `true`. When set to `false` the response body will return an error if a wildcard expression points to indexes that are closed or missing.
@@ -43,7 +45,7 @@ ignore_unlabeled | Defaults to `false`. Unlabeled documents are ignored when set
 template_id | Template ID.
 params | Parameters used in the template.
 
-#### Sample request
+## Example request
 
 ````json
 GET shakespeare/_rank_eval
@@ -72,8 +74,9 @@ GET shakespeare/_rank_eval
   ]
 }
 ````
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 ````json
 {

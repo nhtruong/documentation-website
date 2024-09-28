@@ -5,19 +5,16 @@ parent: CAT API
 
 nav_order: 65
 has_children: false
+redirect_from:
+- /opensearch/rest-api/cat/cat-snapshots/
 ---
 
 # CAT snapshots
-Introduced 1.0
+**Introduced 1.0**
 {: .label .label-purple }
 
 The CAT snapshots operation lists all snapshots for a repository.
 
-## Example
-
-```
-GET _cat/snapshots?v
-```
 
 ## Path and HTTP methods
 
@@ -36,8 +33,17 @@ Parameter | Type | Description
 cluster_manager_timeout | Time | The amount of time to wait for a connection to the cluster manager node. Default is 30 seconds.
 time | Time | Specify the units for time. For example, `5d` or `7h`. For more information, see [Supported units]({{site.url}}{{site.baseurl}}/opensearch/units/).
 
+## Example request
 
-## Response
+The following example request lists all snapshots:
+
+```
+GET _cat/snapshots?v
+```
+{% include copy-curl.html %}
+
+
+## Example response
 
 ```json
 index | shard | prirep | state   | docs | store | ip |       | node

@@ -1,11 +1,13 @@
 ---
 layout: default
 title: Dangling indexes
-parent: index-apis
-nav_order: 84
+parent: Index APIs
+nav_order: 30
 ---
 
 # Dangling indexes API
+**Introduced 1.0**
+{: .label .label-purple }
 
 After a node joins a cluster, dangling indexes occur if any shards exist in the node's local directory that do not already exist in the cluster. Dangling indexes can be listed, deleted, or imported.
 
@@ -41,27 +43,29 @@ index-uuid | UUID of index.
 
 Query parameters are optional.
 
-Query parameter | Data Type | Description
+Query parameter | Data type | Description
 :--- | :--- | :---
-accept_data_loss | Boolean | Must be set to `true` for an `import` or `delete` because Opensearch is unaware of where the dangling index data came from.
+accept_data_loss | Boolean | Must be set to `true` for an `import` or `delete` because OpenSearch is unaware of where the dangling index data came from.
 timeout | Time units | The amount of time to wait for a response. If no response is received in the defined time period, an error is returned. Default is `30` seconds.
-master_timeout | Time units | The amount of time to wait for the connection to the cluster manager. If no response is received in the defined time period, an error is returned. Default is `30` seconds.
+cluster_manager_timeout | Time units | The amount of time to wait for a connection to the cluster manager. If no response is received in the defined time period, an error is returned. Default is `30` seconds.
 
 ## Examples
 
-The following are sample requests and a sample response.
+The following are example requests and a example response.
 
 #### Sample list
 
 ````bash
 GET /_dangling
 ````
+{% include copy-curl.html %}
 
 #### Sample import
 
 ````bash
 POST /_dangling/msdjernajxAT23RT-BupMB?accept_data_loss=true
 ````
+{% include copy-curl.html %}
  
 #### Sample delete
 
@@ -69,7 +73,7 @@ POST /_dangling/msdjernajxAT23RT-BupMB?accept_data_loss=true
 DELETE /_dangling/msdjernajxAT23RT-BupMB?accept_data_loss=true
 ````
 
-#### Sample response body
+#### Example response body
 
 ````json
 {

@@ -1,27 +1,15 @@
 ---
 layout: default
-title: SQL/PPL API
+title: SQL and PPL API
 parent: SQL and PPL
 nav_order: 1
 ---
 
-# SQL/PPL API
+# SQL and PPL API
 
 Use the SQL and PPL API to send queries to the SQL plugin. Use the `_sql` endpoint to send queries in SQL, and the `_ppl` endpoint to send queries in PPL. For both of these, you can also use the `_explain` endpoint to translate your query into [OpenSearch domain-specific language]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/) (DSL) or to troubleshoot errors.
 
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
 ## Query API
-
-Introduced 1.0
-{: .label .label-purple }
 
 Sends an SQL/PPL query to the SQL plugin. You can pass the format for the response as a query parameter.
 
@@ -40,7 +28,7 @@ query | String | The query to be executed. Required.
 [filter](#filtering-results) | JSON object | The filter for the results. Optional.
 [fetch_size](#paginating-results) | integer | The number of results to return in one response. Used for paginating results. Default is 1,000. Optional. Only supported for the `jdbc` response format.
 
-#### Sample request
+#### Example request
 
 ```json
 POST /_plugins/_sql 
@@ -49,7 +37,7 @@ POST /_plugins/_sql
 }
 ```
 
-#### Sample response
+#### Example response
 
 The response contains the schema and the results:
 

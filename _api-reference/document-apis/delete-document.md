@@ -3,10 +3,12 @@ layout: default
 title: Delete document
 parent: Document APIs
 nav_order: 15
+redirect_from: 
+ - /opensearch/rest-api/document-apis/delete-document/
 ---
 
 # Delete document
-Introduced 1.0
+**Introduced 1.0**
 {: .label .label-purple }
 
 If you no longer need a document in your index, you can use the delete document API operation to delete it.
@@ -16,6 +18,7 @@ If you no longer need a document in your index, you can use the delete document 
 ```
 DELETE /sample-index1/_doc/1
 ```
+{% include copy-curl.html %}
 
 ## Path and HTTP methods
 
@@ -39,7 +42,7 @@ version_type | Enum | Retrieves a specifically typed document. Available options
 wait_for_active_shards | String | The number of active shards that must be available before OpenSearch processes the delete request. Default is 1 (only the primary shard). Set to `all` or a positive integer. Values greater than 1 require replicas. For example, if you specify a value of 3, the index must have two replicas distributed across two additional nodes for the operation to succeed. | No
 
 
-## Response
+## Example response
 ```json
 {
   "_index": "sample-index1",
@@ -66,7 +69,7 @@ _version | The document's version.
 _result | The result of the delete operation.
 _shards | Detailed information about the cluster's shards.
 total | The total number of shards.
-successful | The number of shards OpenSearch succssfully deleted the document from.
+successful | The number of shards OpenSearch successfully deleted the document from.
 failed | The number of shards OpenSearch failed to delete the document from.
 _seq_no | The sequence number assigned when the document was indexed.
 _primary_term | The primary term assigned when the document was indexed.

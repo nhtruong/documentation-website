@@ -2,10 +2,12 @@
 layout: default
 title: Scroll
 nav_order: 71
+redirect_from:
+ - /opensearch/rest-api/scroll/
 ---
 
 # Scroll
-Introduced 1.0
+**Introduced 1.0**
 {: .label .label-purple }
 
 You can use the `scroll` operation to retrieve a large number of results. For example, for machine learning jobs, you can request an unlimited number of results in batches.
@@ -25,6 +27,7 @@ GET shakespeare/_search?scroll=10m
   "size": 10000
 }
 ```
+{% include copy-curl.html %}
 
 OpenSearch caches the results and returns a scroll ID to access them in batches:
 
@@ -41,6 +44,7 @@ GET _search/scroll
   "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAAUWdmpUZDhnRFBUcWFtV21nMmFwUGJEQQ=="
 }
 ```
+{% include copy-curl.html %}
 
 Using this scroll ID, you get results in batches of 10,000 as long as the search context is still open. Typically, the scroll ID does not change between requests, but it *can* change, so make sure to always use the latest scroll ID. If you don't send the next scroll request within the set search context, the `scroll` operation does not return any results.
 
@@ -59,6 +63,7 @@ GET shakespeare/_search?scroll=10m
   }
 }
 ```
+{% include copy-curl.html %}
 
 With a single scroll ID, you get back 10 results.
 You can have up to 10 IDs.
@@ -68,12 +73,14 @@ Close the search context when you’re done scrolling, because the `scroll` oper
 ```json
 DELETE _search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAAcWdmpUZDhnRFBUcWFtV21nMmFwUGJEQQ==
 ```
+{% include copy-curl.html %}
 
 To close all open scroll contexts:
 
 ```json
 DELETE _search/scroll/_all
 ```
+{% include copy-curl.html %}
 
 The `scroll` operation corresponds to a specific timestamp. It doesn't consider documents added after that timestamp as potential results.
 
@@ -99,7 +106,7 @@ scroll | Time | Specifies the amount of time the search context is maintained.
 scroll_id | String | The scroll ID for the search.
 rest_total_hits_as_int | Boolean | Whether the `hits.total` property is returned as an integer (`true`) or an object (`false`). Default is `false`.
 
-## Response
+## Example response
 
 ```json
 {

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: JNI libraries
-nav_order: 6
-parent: k-NN
+nav_order: 35
+parent: k-NN search
 has_children: false
+redirect_from:
+ - /search-plugins/knn/jni-library/
 ---
 
 # JNI libraries

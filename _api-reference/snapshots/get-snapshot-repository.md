@@ -5,7 +5,9 @@ parent: Snapshot APIs
 nav_order: 2
 ---
 
-## Get snapshot repository.
+# Get snapshot repository.
+**Introduced 1.0**
+{: .label .label-purple }
 
 Retrieves information about a snapshot repository.
 
@@ -14,28 +16,29 @@ To learn more about repositories, see [Register repository]({{site.url}}{{site.b
 You can also get details about a snapshot during and after snapshot creation. See [Get snapshot status]({{site.url}}{{site.baseurl}}/api-reference/snapshots/get-snapshot-status/).
 {: .note}
 
-### Path parameters
+## Path parameters
 
-| Parameter | Data Type | Description |
+| Parameter | Data type | Description |
 | :--- | :--- | :--- |
 | repository | String | A comma-separated list of snapshot repository names to retrieve. Wildcard (`*`) expressions are supported including combining wildcards with exclude patterns starting with `-`. |
 
-### Query parameters
+## Query parameters
 
-| Parameter | Data Type | Description | 
+| Parameter | Data type | Description | 
 :--- | :--- | :---
 | local | Boolean | Whether to get information from the local node. Optional, defaults to `false`.|
-| cluster_manager_timeout | Time | Amount of time to wait for a connection to the master node. Optional, defaults to 30 seconds. |
+| cluster_manager_timeout | Time | Amount of time to wait for a connection to the cluster manager node. Optional, defaults to 30 seconds. |
 
-#### Sample request
+## Example request
 
 The following request retrieves information for the `my-opensearch-repo` repository:
 
 ````json
 GET /_snapshot/my-opensearch-repo
 ````
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 Upon success, the response returns repositry information. This sample is for an `s3` repository type.
 
@@ -51,9 +54,9 @@ Upon success, the response returns repositry information. This sample is for an 
 }
 ````
 
-### Response fields
+## Response fields
 
-| Field | Data Type | Description |
+| Field | Data type | Description |
 | :--- | :--- | :--- | 
 | type | string | Bucket type: `fs` (file system) or `s3` (s3 bucket) |
 | bucket | string | S3 bucket name. |

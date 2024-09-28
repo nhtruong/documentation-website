@@ -3,13 +3,15 @@ layout: default
 title: Full-Text Search
 parent: SQL and PPL
 nav_order: 11
+redirect_from:
+  - /search-plugins/sql/sql-full-text/
 ---
 
 # Full-text search
 
 Use SQL commands for full-text search. The SQL plugin supports a subset of full-text queries available in OpenSearch.
 
-To learn about full-text queries in OpenSearch, see [Full-text queries]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/).
+To learn about full-text queries in OpenSearch, see [Full-text queries]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/index).
 
 ## Match
 
@@ -36,7 +38,7 @@ You can specify the following options in any order:
 - `zero_terms_query`
 - `boost`
 
-Please, refer to `match` query [documentation]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/#match) for parameter description and supported values.
+Refer to the `match` query [documentation]({{site.url}}{{site.baseurl}}/query-dsl/full-text/match/) for parameter descriptions and supported values.
 
 ### Example 1: Search the `message` field for the text "this is a test":
 
@@ -117,13 +119,13 @@ To search for text in multiple fields, use `MULTI_MATCH` function. This function
 
 ### Syntax
 
-The `MULTI_MATCH` function lets you *boost* certain fields using **^** character. Boosts are multipliers that weigh matches in one field more heavily than matches in other fields. The syntax allows to specify the fields in double quotes, single quotes,  surrounded by backticks, or unquoted. Use star ``"*"`` to search all fields. Star symbol should be quoted.
+The `MULTI_MATCH` function *boosts* certain fields by using **^** character. Boosts are multipliers that weigh matches in one field more heavily than matches in other fields. The syntax supports specifying the fields with double quotes, single quotes, backticks, or without any quotes. Use star ``"*"`` to search all fields. Star symbol should be quoted.
 
 ```sql
 multi_match([field_expression+], query_expression[, option=<option_value>]*)
 ```
 
-The weight is optional and is specified after the field name. It could be delimited by the `caret` character -- `^` or by whitespace. Please, refer to examples below:
+The weight is optional and is specified after the field name. It could be delimited by the `caret` character -- `^` or by white space. Refer to the following examples:
 
 ```sql
 multi_match(["Tags" ^ 2, 'Title' 3.4, `Body`, Comments ^ 0.3], ...)
@@ -148,7 +150,7 @@ You can specify the following options for `MULTI_MATCH` in any order:
 - `zero_terms_query`
 - `boost`
 
-Please, refer to `multi_match` query [documentation](#multi-match) for parameter description and supported values.
+Refer to `multi_match` query [documentation]({{site.baseurl}}/query-dsl/full-text/multi-match/) for parameter description and supported values.
 
 ### For example, REST API search for `Dale` in either the `firstname` or `lastname` fields:
 
@@ -185,13 +187,13 @@ This function maps to the to the `query_string` query used in search engine, to 
 
 ### Syntax
 
-The `QUERY_STRING` function has syntax similar to `MATCH_QUERY` and lets you *boost* certain fields using **^** character. Boosts are multipliers that weigh matches in one field more heavily than matches in other fields. The syntax allows to specify the fields in double quotes, single quotes,  surrounded by backticks, or unquoted. Use star ``"*"`` to search all fields. Star symbol should be quoted.
+The `QUERY_STRING` function has syntax similar to `MATCH_QUERY` and *boosts* certain fields by using **^** character. Boosts are multipliers that weigh matches in one field more heavily than matches in other fields. The syntax supports specifying the fields with double quotes, single quotes, backticks, or without any quotes. Use star ``"*"`` to search all fields. Star symbol should be quoted.
 
 ```sql
 query_string([field_expression+], query_expression[, option=<option_value>]*)
 ```
 
-The weight is optional and is specified after the field name. It could be delimited by the `caret` character -- `^` or by whitespace. Please, refer to examples below:
+The weight is optional and is specified after the field name. It could be delimited by the `caret` character -- `^` or by white space. Refer to the following examples:
 
 ```sql
 query_string(["Tags" ^ 2, 'Title' 3.4, `Body`, Comments ^ 0.3], ...)
@@ -224,7 +226,7 @@ You can specify the following options for `QUERY_STRING` in any order:
 - `tie_breaker`
 - `time_zone`
 
-Please, refer to `query_string` query [documentation]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/#query-string) for parameter description and supported values.
+Refer to the `query_string` query [documentation]({{site.url}}{{site.baseurl}}/query-dsl/full-text/query-string/) for parameter descriptions and supported values.
 
 ### Example of using `query_string` in SQL and PPL queries:
 
@@ -281,7 +283,7 @@ The `MATCHPHRASE`/`MATCH_PHRASE` functions let you specify the following options
 - `zero_terms_query`
 - `boost`
 
-Please, refer to `match_phrase` query [documentation]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/#match-phrase) for parameter description and supported values.
+Refer to the `match_phrase` query [documentation]({{site.url}}{{site.baseurl}}/query-dsl/full-text/match-phrase/) for parameter descriptions and supported values.
 
 ### Example of using `match_phrase` in SQL and PPL queries:
 
@@ -321,13 +323,13 @@ The **^** lets you *boost* certain fields. Boosts are multipliers that weigh mat
 
 ### Syntax
 
-The syntax allows to specify the fields in double quotes, single quotes,  surrounded by backticks, or unquoted. Use star ``"*"`` to search all fields. Star symbol should be quoted.
+The syntax supports specifying the fields with double quotes, single quotes, backticks, or without any quotes. Use star ``"*"`` to search all fields. Star symbol should be quoted.
 
 ```sql
 simple_query_string([field_expression+], query_expression[, option=<option_value>]*)
 ```
 
-The weight is optional and is specified after the field name. It could be delimited by the `caret` character -- `^` or by whitespace. Please, refer to examples below:
+The weight is optional and is specified after the field name. It could be delimited by the `caret` character -- `^` or by white space. Refer to the following examples:
 
 ```sql
 simple_query_string(["Tags" ^ 2, 'Title' 3.4, `Body`, Comments ^ 0.3], ...)
@@ -349,7 +351,7 @@ You can specify the following options for `SIMPLE_QUERY_STRING` in any order:
 - `minimum_should_match`
 - `quote_field_suffix`
 
-Please, refer to `simple_query_string` query [documentation]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/#simple-query-string) to check parameter meanings and available values.
+Refer to the `simple_query_string` query [documentation]({{site.url}}{{site.baseurl}}/query-dsl/full-text/simple-query-string/) for parameter descriptions and supported values.
 
 ### *Example* of using `simple_query_string` in SQL and PPL queries:
 
@@ -400,7 +402,7 @@ The `MATCH_PHRASE_PREFIX` function lets you specify the following options in any
 - `zero_terms_query`
 - `boost`
 
-Please, refer to `match_phrase_prefix` query [documentation]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/#match-phrase-prefix) for parameter description and supported values.
+Refer to the `match_phrase_prefix` query [documentation]({{site.url}}{{site.baseurl}}/query-dsl/full-text/match-phrase-prefix/) for parameter descriptions and supported values.
 
 ### *Example* of using `match_phrase_prefix` in SQL and PPL queries:
 
@@ -456,7 +458,7 @@ The `MATCH_BOOL_PREFIX` function lets you specify the following options in any o
 - `analyzer`
 - `operator`
 
-Please, refer to `match_bool_prefix` query [documentation]({{site.url}}{{site.baseurl}}/opensearch/query-dsl/full-text/#match-boolean-prefix)  for parameter description and supported values.
+Refer to the `match_bool_prefix` query [documentation]({{site.url}}{{site.baseurl}}/query-dsl/full-text/match-bool-prefix/) for parameter descriptions and supported values.
 
 ### Example of using `match_bool_prefix` in SQL and PPL queries:
 

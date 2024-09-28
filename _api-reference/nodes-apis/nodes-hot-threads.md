@@ -6,14 +6,17 @@ nav_order: 30
 ---
 
 # Nodes hot threads
+**Introduced 1.0**
+{: .label .label-purple }
 
 The nodes hot threads endpoint provides information about busy JVM threads for selected cluster nodes. It provides a unique view of the of activity each node.
 
-## Example
+#### Example
 
 ```json
 GET /_nodes/hot_threads
 ```
+{% include copy-curl.html %}
 
 ## Path and HTTP methods
 
@@ -43,13 +46,14 @@ ignore_idle_threads | Boolean   | Don’t show threads that are in known idle st
 type | String | Supported thread types are `cpu`, `wait`, or `block`. Defaults to `cpu`.
 timeout | Time | Sets the time limit for node response. Default value is `30s`.
 
-#### Sample request 
+## Example request 
 
 ```json
 GET /_nodes/hot_threads
 ```
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 ```bash
 ::: {opensearch}{F-ByTQzVQ3GQeYzQJArJGQ}{GxbcLdCATPWggOuQHJAoCw}{127.0.0.1}{127.0.0.1:9300}{dimr}{shard_indexing_pressure_enabled=true}
@@ -61,7 +65,7 @@ GET /_nodes/hot_threads
        org.opensearch.performanceanalyzer.collectors.ScheduledMetricCollectorsExecutor.run(ScheduledMetricCollectorsExecutor.java:100)
 ```
 
-## Response
+## Example response
 
 Unlike the majority of OpenSearch API responses, this response is in a text format.
 
@@ -120,4 +124,4 @@ Then information about threads of the selected type is provided.
 
 ## Required permissions
 
-If you use the security plugin, make sure you set the following permissions: `cluster:monitor/nodes/hot_threads`.
+If you use the Security plugin, make sure you set the following permissions: `cluster:monitor/nodes/hot_threads`.

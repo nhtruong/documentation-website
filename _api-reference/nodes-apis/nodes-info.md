@@ -6,6 +6,8 @@ nav_order: 10
 ---
 
 # Nodes info
+**Introduced 1.0**
+{: .label .label-purple }
 
 The nodes info API represents mostly static information about your cluster's nodes, including but not limited to:
 
@@ -23,12 +25,14 @@ To get information about all nodes in a cluster, use the following query:
 ```json
 GET /_nodes
 ```
+{% include copy-curl.html %}
 
 To get thread pool information about the cluster manager node only, use the following query:
 
 ```json
 GET /_nodes/master:true/thread_pool
 ```
+{% include copy-curl.html %}
 
 ## Path and HTTP methods
 
@@ -54,7 +58,7 @@ The following table lists all available metric groups.
 
 Metric | Description
 :--- |:----
-settings | A node's settings. This is a combination of the default settings, custom settings from the [configuration file]({{site.url}}{{site.baseurl}}/opensearch/configuration/#configuration-file), and dynamically [updated settings]({{site.url}}{{site.baseurl}}/opensearch/configuration/#update-cluster-settings-using-the-api).
+settings | A node's settings. This is a combination of the default settings, custom settings from the [configuration file]({{site.url}}{{site.baseurl}}/install-and-configure/configuring-opensearch/#configuration-file), and dynamically [updated settings]({{site.url}}{{site.baseurl}}/install-and-configure/configuring-opensearch/#updating-cluster-settings-using-the-api).
 os | Static information about the host OS, including version, processor architecture, and available/allocated processors.
 process | Contains the process ID.
 jvm | Detailed static information about the running JVM, including arguments.
@@ -75,15 +79,16 @@ Parameter | Type | Description
 flat_settings| Boolean | Specifies whether to return the `settings` object of the response in flat format. Default is `false`.
 timeout | Time | Sets the time limit for node response. Default value is `30s`.
 
-#### Sample request
+## Example request
 
 The following query requests the `process` and `transport` metrics from the cluster manager node: 
 
 ```json
 GET /_nodes/cluster_manager:true/process,transport
 ```
+{% include copy-curl.html %}
 
-#### Sample response
+## Example response
 
 The response contains the metric groups specified in the `<metrics>` request parameter (in this case, `process` and `transport`):
 
@@ -161,4 +166,4 @@ aggregations | Information about the available aggregation types.
 
 ## Required permissions
 
-If you use the security plugin, make sure you have the appropriate permissions: `cluster:monitor/nodes/info`.
+If you use the Security plugin, make sure you have the appropriate permissions: `cluster:monitor/nodes/info`.

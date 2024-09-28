@@ -2,15 +2,17 @@
 layout: default
 title: Explain
 nav_order: 30
+redirect_from: 
+ - /opensearch/rest-api/explain/
 ---
 
 # Explain
-Introduced 1.0
+**Introduced 1.0**
 {: .label .label-purple }
 
 Wondering why a specific document ranks higher (or lower) for a query? You can use the explain API for an explanation of how the relevance score (`_score`) is calculated for every result.
 
-OpenSearch uses a probabilistic ranking framework called [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) to calculate relevance scores. Okapi BM25 is based on the original [TF/IDF](http://lucene.apache.org/core/{{site.lucene_version}}/core/org/apache/lucene/search/package-summary.html#scoring) framework used by Apache Lucene.
+OpenSearch uses a probabilistic ranking framework called [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) to calculate relevance scores. Okapi BM25 is based on the original [TF/IDF](https://lucene.apache.org/core/{{site.lucene_version}}/core/org/apache/lucene/search/package-summary.html#scoring) framework used by Apache Lucene.
 
 The explain API is an expensive operation in terms of both resources and time. On production clusters, we recommend using it sparingly for the purpose of troubleshooting.
 {: .warning }
@@ -30,6 +32,7 @@ POST opensearch_dashboards_sample_data_ecommerce/_search?explain=true
   }
 }
 ```
+{% include copy-curl.html %}
 
 More often, you want the output for a single document. In that case, specify the document ID in the URL:
 
@@ -43,6 +46,7 @@ POST opensearch_dashboards_sample_data_ecommerce/_explain/EVz1Q3sBgg5eWQP6RSte
   }
 }
 ```
+{% include copy-curl.html %}
 
 ## Path and HTTP methods
 
@@ -60,15 +64,15 @@ Parameter | Type | Description | Required
 `<index>` | String | Name of the index. You can only specify a single index. | Yes
 `<_id>` | String | A unique identifier to attach to the document. | Yes
 `analyzer` | String | The analyzer to use in the query string. | No
-`analyze_wildcard` | Boolean | Specifies whether to analyze wildcard and prefix queries. Default is false. | No
+`analyze_wildcard` | Boolean | Specifies whether to analyze wildcard and prefix queries. Default is `false`. | No
 `default_operator` | String | Indicates whether the default operator for a string query should be AND or OR. Default is OR. | No
 `df` | String | The default field in case a field prefix is not provided in the query string. | No
-`lenient` | Boolean | Specifies whether OpenSearch should ignore format-based query failures (for example, querying a text field for an integer). Default is false. | No
+`lenient` | Boolean | Specifies whether OpenSearch should ignore format-based query failures (for example, querying a text field for an integer). Default is `false`. | No
 `preference` | String | Specifies a preference of which shard to retrieve results from. Available options are `_local`, which tells the operation to retrieve results from a locally allocated shard replica, and a custom string value assigned to a specific shard replica. By default, OpenSearch executes the explain operation on random shards. | No
 `q` | String | Query in the Lucene query string syntax. | No
-`stored_fields` | Boolean | If true, the operation retrieves document fields stored in the index rather than the document’s `_source`. Default is false. | No
+`stored_fields` | Boolean | If true, the operation retrieves document fields stored in the index rather than the document’s `_source`. Default is `false`. | No
 `routing` | String | Value used to route the operation to a specific shard. | No
-`_source` | String | Whether to include the `_source` field in the response body. Default is true. | No
+`_source` | String | Whether to include the `_source` field in the response body. Default is `true`. | No
 `_source_excludes` | String | A comma-separated list of source fields to exclude in the query response. | No
 `_source_includes` | String | A comma-separated list of source fields to include in the query response. | No
 
