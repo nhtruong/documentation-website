@@ -8,8 +8,9 @@ describe DocProcessor do
   SpecHash.load_file('spec/_fixtures/opensearch_spec.yaml')
 
   def test_file(file_name)
-    expected_output = File.read("./spec/_fixtures/output/#{file_name}.md")
+    expected_output = File.read("./spec/_fixtures/expected_output/#{file_name}.md")
     actual_output = described_class.new("spec/_fixtures/input/#{file_name}.md").process(write_to_file: false)
+    File.write("./spec/_fixtures/actual_output/#{file_name}.md", actual_output) # Uncomment for debugging
     expect(actual_output).to eq(expected_output)
   end
 

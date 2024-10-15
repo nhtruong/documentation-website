@@ -1,31 +1,31 @@
 # frozen_string_literal: true
 
+require_relative 'base_mustache_renderer'
 require_relative 'parameter_table_renderer'
+require_relative 'paths_and_methods'
 require_relative '../components/action'
 
 # Class to render spec insertions
-class SpecInsert
+class SpecInsert < BaseMustacheRenderer
   COMPONENTS = Set.new(%w[query_params path_params paths_and_http_methods]).freeze
+  self.template_file = './lib/renderers/templates/spec_insert.mustache'
 
   # @param [Array<Hash>] args
   def initialize(args)
+    super
     @args = args
     @action = Action.actions[args['api']]
     raise ArgumentError, "API Action not found: #{args['api']}" unless @action
   end
 
-  def render_lines
-    lines = ['<!-- spec_insert_start'] +
-            @args.map { |k, v| "#{k}: #{v.is_a?(Array) ? v.join(', ') : v}" } +
-            ['-->'] +
-            render_spec_component +
-            ['<!-- spec_insert_end -->']
-    lines.map { |line| "#{line}\n" }
+  def arguments
+    @args.map do |k, v|
+      { key: k,
+        value: v.is_a?(Array) ? v.join(', ') : v }
+    end
   end
 
-  private
-
-  def render_spec_component
+  def content
     columns = @args['columns']
     pretty = parse_boolean(@args['pretty'], default: false)
     include_global = parse_boolean(@args['include_global'], default: false)
@@ -34,16 +34,18 @@ class SpecInsert
     case @args['component']
     when 'query_params', 'query_parameters'
       arguments = @action.arguments.select { |arg| arg.location == ArgLocation::QUERY }
-      ParameterTableRenderer.new(arguments, columns:, include_global:, include_deprecated:, pretty:).render_lines
+      ParameterTableRenderer.new(arguments, columns:, include_global:, include_deprecated:, pretty:).render
     when 'path_params', 'path_parameters'
       arguments = @action.arguments.select { |arg| arg.location == ArgLocation::PATH }
-      ParameterTableRenderer.new(arguments, columns:, pretty:).render_lines
+      ParameterTableRenderer.new(arguments, columns:, pretty:).render
     when 'paths_and_http_methods'
-      render_paths_and_http_methods
+      PathsAndMethods.new(@action).render
     else
       raise ArgumentError, "Invalid component: #{@args['component']}"
     end
   end
+
+  private
 
   # @param [String] value
   # @param [Boolean] default value to return when nil
@@ -52,14 +54,5 @@ class SpecInsert
     return true if value.in?(%w[true True TRUE yes Yes YES 1])
     return false if value.in?(%w[false False FALSE no No NO 0])
     raise ArgumentError, "Invalid boolean value: #{value}"
-  end
-
-  # @return [Array<String>]
-  def render_paths_and_http_methods
-    ljust = @action.operations.map { |op| op.http_verb.length }.max
-    signatures = @action.operations
-                        .sort_by { |op| [op.url.length, op.http_verb] }
-                        .map { |op| "#{op.http_verb.ljust(ljust)} #{op.url}" }
-    ['```json'] + signatures + ['```']
   end
 end

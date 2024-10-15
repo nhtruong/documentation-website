@@ -16,7 +16,7 @@ class DocProcessor
   # @param [Boolean] write_to_file Whether to write the changes back to the file
   def process(write_to_file: true)
     insertions = find_insertions
-    insertions.reverse_each { |start, finish, insert| @lines[start..finish] = insert.render_lines }
+    insertions.reverse_each { |start, finish, insert| @lines[start..finish] = insert.render }
     content = @lines.join
     if insertions.any? && write_to_file
       puts "Updating #{@file_path}"

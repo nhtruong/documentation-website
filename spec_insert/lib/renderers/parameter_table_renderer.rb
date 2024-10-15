@@ -24,11 +24,11 @@ class ParameterTableRenderer
     @parameters = @parameters.sort_by { |arg| [arg.required ? 0 : 1, arg.deprecated ? 1 : 0, arg.name] }
   end
 
-  # @return [Array<String>]
-  def render_lines
+  # @return [String]
+  def render
     columns = @columns.map { |col| TableRenderer::Column.new(col, col) }
     rows = @parameters.map { |arg| row(arg) }
-    TableRenderer.new(columns, rows, pretty: @pretty).render_lines
+    TableRenderer.new(columns, rows, pretty: @pretty).render_lines.join("\n")
   end
 
   private
