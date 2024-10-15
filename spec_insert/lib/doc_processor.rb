@@ -41,17 +41,7 @@ class DocProcessor
     raise 'Mismatched start/end markers' if start_indices.length != end_indices.length
 
     start_indices.zip(end_indices).map do |start, finish|
-      [start, finish, SpecInsert.new(extract_args(@lines[start..finish]))]
-    end
-  end
-
-  def extract_args(lines)
-    end_index = lines.each_with_index.find { |line, _index| line.match?(/^\s*-->/) }&.last&.- 1
-
-    lines[1..end_index].filter { |line| line.include?(':') }.to_h do |line|
-      key, value = line.split(':')
-      value = value.include?(',') ? value.split(',').map(&:strip) : value.strip
-      [key.strip, value]
+      [start, finish, SpecInsert.new(@lines[start..finish])]
     end
   end
 end

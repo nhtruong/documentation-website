@@ -4,23 +4,15 @@ require_relative 'table_renderer'
 
 # Renders a table of parameters of an API action
 class ParameterTableRenderer
-  COLUMNS = %w[Parameter Description Required Type Default].freeze
-  DEFAULT_COLUMNS = %w[Parameter Type Description].freeze
 
   # @param [Array<Parameter>] parameters
-  # @param [Boolean] include_global whether to include global arguments
-  # @param [Boolean] include_deprecated whether to include deprecated arguments
-  # @param [Boolean] pretty whether to render a pretty table or a compact one
-  def initialize(parameters, include_global: false, include_deprecated: true, columns: DEFAULT_COLUMNS, pretty: false)
-    columns ||= DEFAULT_COLUMNS
-    invalid = columns - COLUMNS
-    raise ArgumentError, "Invalid column(s): #{invalid.join(', ')}" unless invalid.empty?
-
-    @pretty = pretty
-    @columns = columns
+  # @param [InsertArguments] args
+  def initialize(parameters, args)
+    @columns = args.columns
+    @pretty = args.pretty
     @parameters = parameters
-    @parameters = @parameters.reject(&:deprecated) unless include_deprecated
-    @parameters += Parameter.global if include_global
+    @parameters = @parameters.reject(&:deprecated) unless args.include_deprecated
+    @parameters += Parameter.global if args.include_global
     @parameters = @parameters.sort_by { |arg| [arg.required ? 0 : 1, arg.deprecated ? 1 : 0, arg.name] }
   end
 
